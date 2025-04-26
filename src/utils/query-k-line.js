@@ -64,11 +64,11 @@ export default async (ts_code) => {
 
     let { klines } = data?.data;
     klines = strArrToObjArr(klines) || [];
-    klines = calc_ma(klines, 10);
-    klines = calc_ma(klines, 20);
-    klines = calc_ma(klines, 30);
-    klines = calc_ma(klines, 40);
-    klines = calc_ma(klines, 50);
+    klines = calc_ma(klines, 6);
+    klines = calc_ma(klines, 12);
+    klines = calc_ma(klines, 24);
+    klines = calc_ma(klines, 36);
+    klines = calc_ma(klines, 48);
     klines = calc_ma(klines, 60);
 
     return { klines };
