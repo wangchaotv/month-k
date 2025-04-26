@@ -62,7 +62,7 @@ export default async (ts_code) => {
     let response = await fetch(url);
     let data = await response.json();
 
-    let { klines, name } = data?.data;
+    let { klines } = data?.data;
     klines = strArrToObjArr(klines) || [];
     klines = calc_ma(klines, 10);
     klines = calc_ma(klines, 20);
@@ -71,9 +71,9 @@ export default async (ts_code) => {
     klines = calc_ma(klines, 50);
     klines = calc_ma(klines, 60);
 
-    return { klines, name, ts_code };
+    return { klines };
   } catch (error) {
     alert(`query-k-line error: ${error.message}`);
-    return { klines: [], name: ts_code, ts_code };
+    return { klines: [] };
   }
 };
