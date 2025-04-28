@@ -47,14 +47,14 @@ const calc_ma = (data, ma_period) => {
   });
 };
 
-export default async (ts_code) => {
+const query = async (ts_code) => {
   const [code, ex] = ts_code.split('.');
 
   try {
     const secid = `${exMap[ex]}.${code}`; // 沪A 0.xxxxxx, 深A 1.xxxxxx
     const fields1 = 'f1,f3'; // data { code、 name }
     const fields2 = 'f51,f52,f53,f54,f55,f56'; // data.klines [[日期 开盘 收盘 最高 最低 成交量], []]
-    const klt = 103; // 周期: 101 日线,  102 周线,  103 月线
+    const klt = 102; // 周期: 101 日线,  102 周线,  103 月线
     const fqt = '1'; // 复权方式 - 1 前复权
     const beg = '20000101';
     const end = endTime || '20500101';
@@ -64,11 +64,11 @@ export default async (ts_code) => {
 
     let { klines } = data?.data;
     klines = strArrToObjArr(klines) || [];
-    klines = calc_ma(klines, 6);
-    klines = calc_ma(klines, 12);
-    klines = calc_ma(klines, 24);
-    klines = calc_ma(klines, 36);
-    klines = calc_ma(klines, 48);
+    klines = calc_ma(klines, 10);
+    klines = calc_ma(klines, 20);
+    klines = calc_ma(klines, 30);
+    klines = calc_ma(klines, 40);
+    klines = calc_ma(klines, 50);
     klines = calc_ma(klines, 60);
 
     return { klines };
@@ -77,3 +77,5 @@ export default async (ts_code) => {
     return { klines: [] };
   }
 };
+
+export default query;

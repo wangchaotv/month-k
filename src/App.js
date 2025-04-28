@@ -44,7 +44,7 @@ function App() {
         {
           type: 'inside',
           xAxisIndex: [0, 1],
-          startValue: klines.length - 120,
+          startValue: klines.length - 200,
         },
       ],
       grid: [
@@ -107,11 +107,11 @@ function App() {
         {
           xAxisIndex: 0,
           yAxisIndex: 0,
-          name: 'ma6',
+          name: 'ma10',
           type: 'line',
           smooth: true,
           showSymbol: false,
-          data: klines.map((item) => item.ma6),
+          data: klines.map((item) => item.ma10),
           lineStyle: {
             width: 0.8,
             color: 'white', // 橙红色
@@ -120,11 +120,11 @@ function App() {
         {
           xAxisIndex: 0,
           yAxisIndex: 0,
-          name: 'ma12',
+          name: 'ma20',
           type: 'line',
           smooth: true,
           showSymbol: false,
-          data: klines.map((item) => item.ma12),
+          data: klines.map((item) => item.ma20),
           lineStyle: {
             width: 0.8,
             color: '#0000FF', // 纯蓝色
@@ -133,11 +133,11 @@ function App() {
         {
           xAxisIndex: 0,
           yAxisIndex: 0,
-          name: 'ma24',
+          name: 'ma30',
           type: 'line',
           smooth: true,
           showSymbol: false,
-          data: klines.map((item) => item.ma24),
+          data: klines.map((item) => item.ma30),
           lineStyle: {
             width: 0.8,
             color: '#4169E1', // 皇家蓝
@@ -146,11 +146,11 @@ function App() {
         {
           xAxisIndex: 0,
           yAxisIndex: 0,
-          name: 'ma36',
+          name: 'ma40',
           type: 'line',
           smooth: true,
           showSymbol: false,
-          data: klines.map((item) => item.ma36),
+          data: klines.map((item) => item.ma40),
           lineStyle: {
             width: 0.8,
             color: '#008000', // 纯绿色
@@ -159,11 +159,11 @@ function App() {
         {
           xAxisIndex: 0,
           yAxisIndex: 0,
-          name: 'ma48',
+          name: 'ma50',
           type: 'line',
           smooth: true,
           showSymbol: false,
-          data: klines.map((item) => item.ma48),
+          data: klines.map((item) => item.ma50),
           lineStyle: {
             width: 0.8,
             color: '#FF0000', // 红色
@@ -232,6 +232,7 @@ function App() {
     queryKLine(code).then((data) => {
       generateOption(data.klines);
     });
+    // eslint-disable-next-line
   }, [code]);
 
   const handleKeyboard = (e) => {
