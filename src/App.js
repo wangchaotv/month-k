@@ -44,7 +44,7 @@ function App() {
         {
           type: 'inside',
           xAxisIndex: [0, 1],
-          startValue: klines.length - 200,
+          startValue: klines.length - 260,
         },
       ],
       grid: [
