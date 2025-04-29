@@ -47,14 +47,14 @@ const calc_ma = (data, ma_period) => {
   });
 };
 
-const query = async (ts_code) => {
+const query = async (ts_code, cycle) => {
   const [code, ex] = ts_code.split('.');
 
   try {
     const secid = `${exMap[ex]}.${code}`; // 沪A 0.xxxxxx, 深A 1.xxxxxx
     const fields1 = 'f1,f3'; // data { code、 name }
     const fields2 = 'f51,f52,f53,f54,f55,f56'; // data.klines [[日期 开盘 收盘 最高 最低 成交量], []]
-    const klt = 102; // 周期: 101 日线,  102 周线,  103 月线
+    const klt = cycle === 'week' ? 102 : 101; // 周期: 101 日线,  102 周线,  103 月线
     const fqt = '1'; // 复权方式 - 1 前复权
     const beg = '20000101';
     const end = endTime || '20500101';

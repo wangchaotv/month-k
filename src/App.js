@@ -9,9 +9,11 @@ const params = new URLSearchParams(window.location.search);
 const { index } = Object.fromEntries(params.entries());
 
 let i = 0;
+let _cycle = 'week';
 
 function App() {
   const [startIndex, setStartIndex] = useState(index || 0);
+  const [cycle, setCycle] = useState('week'); // week or dayF
 
   const chartRef = useRef(null);
   const chartInstanceRef = useRef(null);
@@ -44,7 +46,7 @@ function App() {
         {
           type: 'inside',
           xAxisIndex: [0, 1],
-          startValue: klines.length - 260,
+          startValue: klines.length - (cycle === 'week' ? 260 : 200),
         },
       ],
       grid: [
@@ -209,7 +211,9 @@ function App() {
             left: '2%',
             z: 10,
             style: {
-              text: `${name}(${startIndex + 1}/${stocks.length})`,
+              text: `${name}(${startIndex + 1}/${stocks.length})(${
+                cycle === 'week' ? '周' : '日'
+              })`,
               fontSize: 16,
               fill: 'white',
             },
@@ -229,15 +233,15 @@ function App() {
   };
 
   useEffect(() => {
-    queryKLine(code).then((data) => {
+    queryKLine(code, cycle).then((data) => {
       generateOption(data.klines);
     });
     // eslint-disable-next-line
-  }, [code]);
+  }, [code, cycle]);
 
   const handleKeyboard = (e) => {
     const max = stocks.length - 1;
-    if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') {
+    if (e.key === 'ArrowLeft') {
       if (i <= 0) {
         setStartIndex(max);
         i = max;
@@ -245,7 +249,9 @@ function App() {
         setStartIndex(i - 1);
         i = i - 1;
       }
-    } else if (e.key === 'ArrowRight' || e.key === 'ArrowDown') {
+      setCycle('week');
+      _cycle = 'week';
+    } else if (e.key === 'ArrowRight') {
       if (i >= max) {
         setStartIndex(0);
         i = 0;
@@ -253,6 +259,12 @@ function App() {
         setStartIndex(i + 1);
         i = i + 1;
       }
+      setCycle('week');
+      _cycle = 'week';
+    } else if (e.key === 'ArrowUp' || e.key === 'ArrowDown') {
+      setCycle(_cycle === 'week' ? 'day' : 'week');
+      _cycle = _cycle === 'week' ? 'day' : 'week';
+    } else if (e.key === 'Enter') {
     }
   };
 
