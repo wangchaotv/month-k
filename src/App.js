@@ -190,6 +190,17 @@ function App() {
           name: 'vol',
           type: 'bar',
           data: klines.map((item) => item.vol),
+          markLine: {
+            silent: true,
+            symbol: ['none', 'none'],
+            label: { show: false },
+            lineStyle: { color: 'white', width: 1, type: 'solid' },
+            data: [
+              {
+                yAxis: klines.at(-1).vol,
+              },
+            ],
+          },
           itemStyle: {
             color: (params) => {
               const close = klines[params.dataIndex]?.close;
