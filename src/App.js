@@ -240,12 +240,7 @@ function App() {
               fill: 'white',
             },
             onclick: () => {
-              const [codeNumber, ex] = code.split('.');
-              // 东财 url 上 code 格式
-              const code_for_dongcai = `${ex}${codeNumber}`;
-              window.open(
-                `https://emweb.securities.eastmoney.com/pc_hsf10/pages/index.html?type=web&code=${code_for_dongcai}&color=b#/gsgk`
-              );
+              window.open(`https://wangchaotv.github.io/stock/?code=${code}`);
             },
           },
         ],
