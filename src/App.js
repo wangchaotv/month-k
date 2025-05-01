@@ -8,11 +8,11 @@ import './App.css';
 const params = new URLSearchParams(window.location.search);
 const { index } = Object.fromEntries(params.entries());
 
-let i = 0;
+let i = Number(index) - 1 || 0;
 let _cycle = 'week';
 
 function App() {
-  const [startIndex, setStartIndex] = useState(index || 0);
+  const [startIndex, setStartIndex] = useState(i);
   const [cycle, setCycle] = useState('week'); // week or dayF
 
   const chartRef = useRef(null);
@@ -105,6 +105,17 @@ function App() {
             item.low,
             item.high,
           ]),
+          markLine: {
+            silent: true,
+            symbol: ['none', 'none'],
+            label: { show: true, position: 'start', color: 'white' },
+            lineStyle: { color: 'white', width: 0.5, type: 'dashed' },
+            data: [
+              {
+                yAxis: klines.at(-1).close,
+              },
+            ],
+          },
         },
         {
           xAxisIndex: 0,
