@@ -11,10 +11,12 @@ const { index, code, name } = Object.fromEntries(params.entries());
 let i = Number(index) - 1 || 0;
 let _cycle = 'week';
 
-stocks.unshift({
-  SECUCODE: code,
-  SECURITY_NAME_ABBR: name,
-});
+if (code && name) {
+  stocks.unshift({
+    SECUCODE: code,
+    SECURITY_NAME_ABBR: name,
+  });
+}
 
 function App() {
   const [startIndex, setStartIndex] = useState(i);
